@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+
+
+    <bean id="cellService" class="shop.service.CellService">
+        <property name = "urlMap">
+            <map>
+                <entry key = "aTH10HUMI" value = "../../images/s10.png"></entry>
+                <entry key = "aTH10TEMP" value = "../../images/w10.png"></entry>
+                <entry key = "aTH09HUMI" value = "../../images/s9.png"></entry>
+                <entry key = "aTH09TEMP" value = "../../images/w9.png"></entry>
+                <entry key = "aTH08HUMI" value = "../../images/s8.png"></entry>
+                <entry key = "aTH08TEMP" value = "../../images/w8.png"></entry>
+                <entry key = "aTH07HUMI" value = "../../images/s7.png"></entry>
+                <entry key = "aTH07TEMP" value = "../../images/w7.png"></entry>
+                <entry key = "aTH06HUMI" value = "../../images/s6.png"></entry>
+                <entry key = "aTH06TEMP" value = "../../images/w6.png"></entry>
+                <entry key = "aTH05HUMI" value = "../../images/s5.png"></entry>
+                <entry key = "aTH05TEMP" value = "../../images/w5.png"></entry>
+                <entry key = "aTH04HUMI" value = "../../images/s4.png"></entry>
+                <entry key = "aTH04TEMP" value = "../../images/w4.png"></entry>
+                <entry key = "aTH03HUMI" value = "../../images/s3.png"></entry>
+                <entry key = "aTH03TEMP" value = "../../images/w3.png"></entry>
+                <entry key = "aTH02HUMI" value = "../../images/s2.png"></entry>
+                <entry key = "aTH02TEMP" value = "../../images/w2.png"></entry>
+                <entry key = "aTH01HUMI" value = "../../images/s1.png"></entry>
+                <entry key = "aTH01TEMP" value = "../../images/w1.png"></entry>
+            </map>
+        </property>
+
+    </bean>
+
+
+</beans>

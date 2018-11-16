@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="shop.dao.CellMapper">
+  <resultMap id="BaseResultMap" type="shop.domain.Cell">
+    <id column="id" jdbcType="INTEGER" property="id" />
+    <result column="config_id" jdbcType="INTEGER" property="configId" />
+    <result column="p_name" jdbcType="VARCHAR" property="pName" />
+    <result column="p_desc" jdbcType="VARCHAR" property="pDesc" />
+    <result column="p_type" jdbcType="VARCHAR" property="pType" />
+    <result column="model" jdbcType="INTEGER" property="model" />
+    <result column="modbus_addr" jdbcType="INTEGER" property="modbusAddr" />
+    <result column="p_value" jdbcType="VARCHAR" property="pValue" />
+    <result column="created" jdbcType="TIMESTAMP" property="created" />
+    <result column="group_code" jdbcType="VARCHAR" property="groupCode" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    id, config_id, p_name, p_desc, p_type, model, modbus_addr, p_value, created, group_code
+  </sql>
+  <select id="selectByAddress" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from plc_pro_50
+    where modbus_addr = #{modbusAddr} order by created desc limit 1
+  </select>
+</mapper>
