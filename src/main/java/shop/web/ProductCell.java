@@ -16,10 +16,23 @@ public class ProductCell {
     @Resource
     private CellService cellService;
 
-    @RequestMapping(value = "all")
+    @RequestMapping(value = "al3")
     @ResponseBody
-    public List<Cell> in() {
-        System.out.println("---");
-        return cellService.getCell();
+    public List<Cell> in3() {
+        System.out.println("---3");
+        return cellService.getCell3();
+    }
+    @RequestMapping(value = "al4")
+    @ResponseBody
+    public List<Cell> in4() {
+        System.out.println("---4");
+        return cellService.getCell4();
+    }
+
+    @RequestMapping(value = "al1")
+    @ResponseBody
+    public List<Cell> in1() {
+        System.out.println("---1");
+        return cellService.getCell1();
     }
 }

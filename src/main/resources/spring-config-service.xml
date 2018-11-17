@@ -8,26 +8,91 @@
     <bean id="cellService" class="shop.service.CellService">
         <property name = "urlMap">
             <map>
-                <entry key = "aTH10HUMI" value = "../../images/s10.png"></entry>
-                <entry key = "aTH10TEMP" value = "../../images/w10.png"></entry>
-                <entry key = "aTH09HUMI" value = "../../images/s9.png"></entry>
-                <entry key = "aTH09TEMP" value = "../../images/w9.png"></entry>
-                <entry key = "aTH08HUMI" value = "../../images/s8.png"></entry>
-                <entry key = "aTH08TEMP" value = "../../images/w8.png"></entry>
-                <entry key = "aTH07HUMI" value = "../../images/s7.png"></entry>
-                <entry key = "aTH07TEMP" value = "../../images/w7.png"></entry>
-                <entry key = "aTH06HUMI" value = "../../images/s6.png"></entry>
-                <entry key = "aTH06TEMP" value = "../../images/w6.png"></entry>
-                <entry key = "aTH05HUMI" value = "../../images/s5.png"></entry>
-                <entry key = "aTH05TEMP" value = "../../images/w5.png"></entry>
-                <entry key = "aTH04HUMI" value = "../../images/s4.png"></entry>
-                <entry key = "aTH04TEMP" value = "../../images/w4.png"></entry>
-                <entry key = "aTH03HUMI" value = "../../images/s3.png"></entry>
-                <entry key = "aTH03TEMP" value = "../../images/w3.png"></entry>
-                <entry key = "aTH02HUMI" value = "../../images/s2.png"></entry>
-                <entry key = "aTH02TEMP" value = "../../images/w2.png"></entry>
-                <entry key = "aTH01HUMI" value = "../../images/s1.png"></entry>
-                <entry key = "aTH01TEMP" value = "../../images/w1.png"></entry>
+                <entry key = "aTH10HUMI" value = "../../images/tyj/s10.png"></entry>
+                <entry key = "aTH10TEMP" value = "../../images/tyj/w10.png"></entry>
+                <entry key = "aTH09HUMI" value = "../../images/tyj/s9.png"></entry>
+                <entry key = "aTH09TEMP" value = "../../images/tyj/w9.png"></entry>
+                <entry key = "aTH08HUMI" value = "../../images/tyj/s8.png"></entry>
+                <entry key = "aTH08TEMP" value = "../../images/tyj/w8.png"></entry>
+                <entry key = "aTH07HUMI" value = "../../images/tyj/s7.png"></entry>
+                <entry key = "aTH07TEMP" value = "../../images/tyj/w7.png"></entry>
+                <entry key = "aTH06HUMI" value = "../../images/tyj/s6.png"></entry>
+                <entry key = "aTH06TEMP" value = "../../images/tyj/w6.png"></entry>
+                <entry key = "aTH05HUMI" value = "../../images/tyj/s5.png"></entry>
+                <entry key = "aTH05TEMP" value = "../../images/tyj/w5.png"></entry>
+                <entry key = "aTH04HUMI" value = "../../images/tyj/s4.png"></entry>
+                <entry key = "aTH04TEMP" value = "../../images/tyj/w4.png"></entry>
+                <entry key = "aTH03HUMI" value = "../../images/tyj/s3.png"></entry>
+                <entry key = "aTH03TEMP" value = "../../images/tyj/w3.png"></entry>
+                <entry key = "aTH02HUMI" value = "../../images/tyj/s2.png"></entry>
+                <entry key = "aTH02TEMP" value = "../../images/tyj/w2.png"></entry>
+                <entry key = "aTH01HUMI" value = "../../images/tyj/s1.png"></entry>
+                <entry key = "aTH01TEMP" value = "../../images/tyj/w1.png"></entry>
+
+
+                <entry key = "mQ1601" value = "../../images/tyc/wzlk.png"></entry>
+                <entry key = "mQ1602" value = "../../images/tyc/wzlg.png"></entry>
+
+                <entry key = "mQ1603" value = "../../images/tyc/nzlk.png"></entry>
+                <entry key = "mQ1604" value = "../../images/tyc/nzlg.png"></entry>
+
+                <entry key = "mQ1605" value = "../../images/tyc/tck.png"></entry>
+                <entry key = "mQ1606" value = "../../images/tyc/tcg.png"></entry>
+
+                <entry key = "mQ1608" value = "../../images/tyc/sltck01.png"></entry>
+                <entry key = "mQ1607" value = "../../images/tyc/slctg.png"></entry>
+                <entry key = "mQ1610" value = "../../images/tyc/sltcg02.png"></entry>
+                <entry key = "mQ1609" value = "../../images/tyc/sltcg2.png"></entry>
+
+                <entry key = "mQ1611" value = "../../images/tyc/w1.png"></entry>
+                <entry key = "mQ1611" value = "../../images/tyc/w1.png"></entry>
+
+                <entry key = "mQ1611" value = "../../images/tyc/sb-01.png"></entry>
+                <entry key = "mQ1612" value = "../../images/tyc/sb-02.png"></entry>
+
+                <entry key = "mQ1613" value = "../../images/tyc/s-01.png"></entry>
+                <entry key = "mQ1614" value = "../../images/tyc/s-02.png"></entry>
+                <entry key = "mQ1615" value = "../../images/tyc/s-03.png"></entry>
+
+
+                <entry key = "mQ1616" value = "../../images/tyc/d-01.png"></entry>
+                <entry key = "mQ1701" value = "../../images/tyc/d-02.png"></entry>
+                <entry key = "mQ1702" value = "../../images/tyc/d-03.png"></entry>
+                <entry key = "mQ1703" value = "../../images/tyc/d-04.png"></entry>
+                <entry key = "mQ1704" value = ""></entry>
+
+                <entry key = "mQ1705" value = "../../images/tyc/can-05.png"></entry>
+                <entry key = "mQ1706" value = "../../images/tyc/can-06.png"></entry>
+                <entry key = "mQ1707" value = "../../images/tyc/can-07.png"></entry>
+                <entry key = "mQ1708" value = "../../images/tyc/can-08.png"></entry>
+                <entry key = "mQ1709" value = "../../images/tyc/can-09.png"></entry>
+                <entry key = "mQ1710" value = "../../images/tyc/can-10.png"></entry>
+                <entry key = "mQ1711" value = "../../images/tyc/can-11.png"></entry>
+                <entry key = "mQ1712" value = "../../images/tyc/can-12.png"></entry>
+                <entry key = "mQ1713" value = "../../images/tyc/can-13.png"></entry>
+                <entry key = "mQ1714" value = "../../images/tyc/can-14.png"></entry>
+                <entry key = "mQ1715" value = "../../images/tyc/can-15.png"></entry>
+                <entry key = "mQ1716" value = "../../images/tyc/can-16.png"></entry>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             </map>
         </property>
 
