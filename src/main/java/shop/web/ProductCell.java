@@ -4,6 +4,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import shop.domain.Cell;
+import shop.domain.I;
 import shop.service.CellService;
 
 import javax.annotation.Resource;
@@ -19,20 +20,23 @@ public class ProductCell {
     @RequestMapping(value = "al3")
     @ResponseBody
     public List<Cell> in3() {
-        System.out.println("---3");
-        return cellService.getCell3();
+        return cellService.getCell33();
     }
     @RequestMapping(value = "al4")
     @ResponseBody
     public List<Cell> in4() {
-        System.out.println("---4");
-        return cellService.getCell4();
-    }
+        return cellService.getCell44();
 
+    }
     @RequestMapping(value = "al1")
     @ResponseBody
     public List<Cell> in1() {
-        System.out.println("---1");
-        return cellService.getCell1();
+        return cellService.getCell11();
+    }
+    @RequestMapping(value = "i")
+    @ResponseBody
+    public I i() {
+        System.out.println("---xin tiao");
+        return cellService.i();
     }
 }

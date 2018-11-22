@@ -6,13 +6,13 @@ import shop.dao.CellMapper;
 import shop.dao.ConfigMapper;
 import shop.domain.Cell;
 import shop.domain.Config;
+import shop.domain.I;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import javax.xml.registry.infomodel.User;
 import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 public class CellService {
 
@@ -72,6 +72,7 @@ public class CellService {
      * @return
      */
     public List<Cell> getCell4() {
+        long ks = System.currentTimeMillis();
         List<Cell> listCell = new ArrayList<Cell>();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
@@ -88,8 +89,47 @@ public class CellService {
         } catch (Exception e) {
             logger.error("getCell4 selectByAddress is exception : " + e);
         }
+        System.out.println(System.currentTimeMillis()-ks);
         return listCell;
     }
+
+
+    /**
+     * 功能码 44
+     *
+     * @return
+     */
+    public List<Cell> getCell44() {
+        long k = System.currentTimeMillis();
+        List<Cell> listCell = new ArrayList<Cell>();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            List<Cell> rs = cellMapper.readSort(4,listConfigModel4.size());
+            if (CollectionUtils.isEmpty(rs)) {
+                logger.error("getCell44 rs is null");
+                return listCell;
+            }
+            for (Cell c : rs) {
+                c.setImgurl(urlMap.get(c.getpName()));
+                c.setNow(sdf.format(c.getCreated()));
+            }
+            if (rs.size() != listConfigModel4.size()) {
+                logger.error("getCell44 read data length is not eqauls");
+            }
+             listCell = rs;
+        } catch (Exception e) {
+            logger.error("getCell44 readSort is exception : " + e);
+        }
+        Collections.sort(listCell, new Comparator<Cell>() {
+            public int compare(Cell Cell1, Cell Cell2) {
+                return Cell1.getConfigId().compareTo(Cell2.getConfigId());
+            }
+        });
+        logger.info("getCell44 time consuming : " + (System.currentTimeMillis()-k));
+        return listCell;
+    }
+
+
 
     /**
      * 功能码 3
@@ -117,11 +157,42 @@ public class CellService {
 
 
     /**
+     * 功能码 33
+     *
+     * @return
+     */
+    public List<Cell> getCell33() {
+        long k = System.currentTimeMillis();
+        List<Cell> listCell = new ArrayList<Cell>();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        try {
+            List<Cell> rs = cellMapper.readSort(3,listConfigModel3.size());
+            if (CollectionUtils.isEmpty(rs)) {
+                logger.error("getCell33 rs is null");
+                return listCell;
+            }
+            for (Cell c : rs) {
+                c.setImgurl(urlMap.get(c.getpName()));
+                c.setNow(sdf.format(c.getCreated()));
+            }
+            if (rs.size() != listConfigModel4.size()) {
+                logger.error("getCell33 read data length is not eqauls");
+            }
+            listCell = rs;
+        } catch (Exception e) {
+            logger.error("getCell33 readSort is exception : " + e);
+        }
+        System.out.println(System.currentTimeMillis()-k);
+        return listCell;
+    }
+
+    /**
      * 功能码 1
      *
      * @return
      */
     public List<Cell> getCell1() {
+        long k = System.currentTimeMillis();
         List<Cell> listCell = new ArrayList<Cell>();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         try {
@@ -137,9 +208,64 @@ public class CellService {
         } catch (Exception e) {
             logger.error("getCell1 selectByAddress is exception : " + e);
         }
+        System.out.println(System.currentTimeMillis()-k);
         return listCell;
     }
 
+    /**
+     * 功能码 11
+     *
+     * @return
+     */
+    public List<Cell> getCell11() {
+        long k = System.currentTimeMillis();
+        List<Cell> listCell = new ArrayList<Cell>();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+        try {
+            List<Cell> rs = cellMapper.readSort(1,listConfigModel1.size());
+            if (CollectionUtils.isEmpty(rs)) {
+                logger.error("getCell11 rs is null");
+                return listCell;
+            }
+            for (Cell c : rs) {
+                c.setImgurl(urlMap.get(c.getpName()));
+                c.setNow(sdf.format(c.getCreated()));
+            }
+            if (rs.size() != listConfigModel1.size()) {
+                logger.error("getCell11 read data length is not eqauls");
+            }
+            listCell = rs;
+        } catch (Exception e) {
+            logger.error("getCell11 readSort is exception : " + e);
+        }
+
+        Collections.sort(listCell, new Comparator<Cell>() {
+            public int compare(Cell Cell1, Cell Cell2) {
+                return Cell1.getConfigId().compareTo(Cell2.getConfigId());
+            }
+        });
+        logger.info("getCell11 time consuming : " + (System.currentTimeMillis()-k));
+        return listCell;
+    }
+
+    /**
+     * 心跳
+     *
+     * @return
+     */
+    public I i() {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        I i = new I();
+        i.setDate(sdf.format(new Date()));
+        Cell ii = cellMapper.i();
+        if (ii == null || ii.getCreated() == null) {
+            logger.warn("rs1 is null");
+            return i;
+        }
+        i.setcDate(sdf.format(ii.getCreated()));
+        return i;
+    }
 
     public static Map<String, String> getUrlMap() {
         return urlMap;
