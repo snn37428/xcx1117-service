@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:task="http://www.springframework.org/schema/task"
        xsi:schemaLocation="http://www.springframework.org/schema/beans
-                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd">
+                        http://www.springframework.org/schema/beans/spring-beans-3.1.xsd http://www.springframework.org/schema/task http://www.springframework.org/schema/task/spring-task.xsd">
 
 
     <bean id="cellService" class="shop.service.CellService">
@@ -75,28 +75,20 @@
                 <entry key = "mQ1716" value = "../../images/tyc/can-16.png"></entry>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
             </map>
         </property>
 
     </bean>
 
+    <task:scheduled-tasks>
+        <!--<task:scheduled ref="task" method="readTaskList4" cron="*/5 * * * * ?"/>-->
+
+        <task:scheduled ref="cellService" method="getCell44" cron="*/2 * * * * ?"/>
+
+        <task:scheduled ref="cellService" method="getCell11" cron="*/2 * * * * ?"/>
+
+        <!--<task:scheduled ref="alarm" method="taskAlarmConfig" cron="*/10 * * * * ?"/>-->
+
+    </task:scheduled-tasks>
 
 </beans>

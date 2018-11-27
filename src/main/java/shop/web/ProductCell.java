@@ -20,19 +20,22 @@ public class ProductCell {
     @RequestMapping(value = "al3")
     @ResponseBody
     public List<Cell> in3() {
-        return cellService.getCell33();
+        return null;
     }
+
     @RequestMapping(value = "al4")
     @ResponseBody
     public List<Cell> in4() {
-        return cellService.getCell44();
+        return CellService.getResCell4();
 
     }
+
     @RequestMapping(value = "al1")
     @ResponseBody
     public List<Cell> in1() {
-        return cellService.getCell11();
+        return CellService.getResCell1();
     }
+
     @RequestMapping(value = "i")
     @ResponseBody
     public I i() {
