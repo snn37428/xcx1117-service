@@ -74,11 +74,12 @@
                 <entry key = "mQ1715" value = "../../images/tyc/can-15.png"></entry>
                 <entry key = "mQ1716" value = "../../images/tyc/can-16.png"></entry>
 
-
             </map>
         </property>
-
     </bean>
+
+    <bean id="instructService" class="shop.service.InstructService"></bean>
+
 
     <task:scheduled-tasks>
         <!--<task:scheduled ref="task" method="readTaskList4" cron="*/5 * * * * ?"/>-->
@@ -87,6 +88,7 @@
 
         <task:scheduled ref="cellService" method="getCell11" cron="*/2 * * * * ?"/>
 
+        <task:scheduled ref="cellService" method="i" cron="*/2 * * * * ?"/>
         <!--<task:scheduled ref="alarm" method="taskAlarmConfig" cron="*/10 * * * * ?"/>-->
 
     </task:scheduled-tasks>

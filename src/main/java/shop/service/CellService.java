@@ -6,7 +6,6 @@ import shop.dao.CellMapper;
 import shop.dao.ConfigMapper;
 import shop.domain.Cell;
 import shop.domain.Config;
-import shop.domain.I;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -41,6 +40,11 @@ public class CellService {
      * 功能码3 内存缓存
      */
     private static List<Cell> ResCell1 = new ArrayList<Cell>();
+
+    /**
+     * 心跳内存
+     */
+    private static String xindate = "";
 
     @Resource
     private CellMapper cellMapper;
@@ -86,7 +90,7 @@ public class CellService {
             List<Cell> rs = cellMapper.readSort(4, listConfigModel4.size());
             if (CollectionUtils.isEmpty(rs)) {
                 logger.error("getCell44 rs is null");
-                return ;
+                return;
             }
             for (Cell c : rs) {
                 String dfe = urlMap.get(c.getpName());
@@ -106,7 +110,7 @@ public class CellService {
             }
         });
         ResCell4.clear();
-        ResCell4  = listCell;
+        ResCell4 = listCell;
         logger.info("getCell44 time consuming : " + (System.currentTimeMillis() - k));
     }
 
@@ -123,7 +127,7 @@ public class CellService {
             List<Cell> rs = cellMapper.readSort(3, listConfigModel3.size());
             if (CollectionUtils.isEmpty(rs)) {
                 logger.error("getCell33 rs is null");
-                return ;
+                return;
             }
             for (Cell c : rs) {
                 c.setImgurl(urlMap.get(c.getpName()));
@@ -155,7 +159,7 @@ public class CellService {
             List<Cell> rs = cellMapper.readSort(1, listConfigModel1.size());
             if (CollectionUtils.isEmpty(rs)) {
                 logger.error("getCell11 rs is null");
-                return ;
+                return;
             }
             for (Cell c : rs) {
                 c.setImgurl(urlMap.get(c.getpName()));
@@ -175,7 +179,7 @@ public class CellService {
             }
         });
         ResCell1.clear();
-        ResCell1  = listCell;
+        ResCell1 = listCell;
         logger.info("getCell11 time consuming : " + (System.currentTimeMillis() - k));
     }
 
@@ -184,17 +188,17 @@ public class CellService {
      *
      * @return
      */
-    public I i() {
+    public void i() {
+        long ks = System.currentTimeMillis();
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        I i = new I();
-        i.setDate(sdf.format(new Date()));
         Cell ii = cellMapper.i();
         if (ii == null || ii.getCreated() == null) {
             logger.warn("rs1 is null");
-            return i;
+            return;
         }
-        i.setcDate(sdf.format(ii.getCreated()));
-        return i;
+        xindate = null;
+        xindate = sdf.format(ii.getCreated());
+        logger.info("xin tiao : " + (System.currentTimeMillis() - ks));
     }
 
     /**
@@ -290,6 +294,14 @@ public class CellService {
 
     public static void setResCell1(List<Cell> resCell3) {
         ResCell1 = resCell3;
+    }
+
+    public static String getXindate() {
+        return xindate;
+    }
+
+    public static void setXindate(String xindate) {
+        CellService.xindate = xindate;
     }
 
     public static Map<String, String> getUrlMap() {

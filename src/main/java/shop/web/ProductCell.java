@@ -8,6 +8,8 @@ import shop.domain.I;
 import shop.service.CellService;
 
 import javax.annotation.Resource;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 @Controller
@@ -39,7 +41,10 @@ public class ProductCell {
     @RequestMapping(value = "i")
     @ResponseBody
     public I i() {
-        System.out.println("---xin tiao");
-        return cellService.i();
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        I i = new I();
+        i.setDate(sdf.format(new Date()));
+        i.setcDate(CellService.getXindate());
+        return i;
     }
 }
