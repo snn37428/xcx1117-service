@@ -164,6 +164,11 @@ public class CellService {
             for (Cell c : rs) {
                 c.setImgurl(urlMap.get(c.getpName()));
                 c.setNow(sdf.format(c.getCreated()));
+                if ("1".equals(c.getpValue())) {
+                    c.setSliderValue("100");
+                } else {
+                    c.setSliderValue("0");
+                }
             }
             if (rs.size() != listConfigModel1.size()) {
                 logger.error("getCell11 read data length is not eqauls");
@@ -272,11 +277,6 @@ public class CellService {
                 }
                 rs.setImgurl(urlMap.get(rs.getpName()));
                 rs.setNow(sdf.format(rs.getCreated()));
-                if ("1".equals(rs.getpValue())) {
-                    rs.setpValue("100");
-                } else {
-                    rs.setpValue("0");
-                }
                 listCell.add(rs);
             }
         } catch (Exception e) {

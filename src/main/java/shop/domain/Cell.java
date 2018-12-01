@@ -27,6 +27,8 @@ public class Cell {
 
     private String imgurl;
 
+    private String sliderValue;
+
     public String getImgurl() {
         return imgurl;
     }
@@ -121,5 +123,13 @@ public class Cell {
 
     public void setNow(String now) {
         this.now = now;
+    }
+
+    public String getSliderValue() {
+        return sliderValue;
+    }
+
+    public void setSliderValue(String sliderValue) {
+        this.sliderValue = sliderValue;
     }
 }
