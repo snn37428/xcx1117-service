@@ -272,6 +272,11 @@ public class CellService {
                 }
                 rs.setImgurl(urlMap.get(rs.getpName()));
                 rs.setNow(sdf.format(rs.getCreated()));
+                if ("1".equals(rs.getpValue())) {
+                    rs.setpValue("100");
+                } else {
+                    rs.setpValue("0");
+                }
                 listCell.add(rs);
             }
         } catch (Exception e) {

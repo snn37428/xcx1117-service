@@ -1,9 +1,11 @@
 package shop.service;
 
+import com.alibaba.fastjson.JSONObject;
 import org.apache.log4j.Logger;
 import org.springframework.util.StringUtils;
 import shop.dao.InstructMapper;
 import shop.domain.Instruct;
+import shop.mq.ProducerService;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -33,10 +35,14 @@ public class InstructService {
             logger.warn("write: insert is success");
         }
 
-
-
-        logger.warn("write: param is invalid");
-
+        try {
+            ProducerService.send(JSONObject.toJSONString(instruct));
+        } catch (Exception e) {
+            logger.error("write: mq send is failed, msg : " + JSONObject.toJSONString(instruct));
+            logger.error(e);
+            return;
+        }
+        logger.info("write: mq send is success, msg : " + JSONObject.toJSONString(instruct));
     }
 
 }
