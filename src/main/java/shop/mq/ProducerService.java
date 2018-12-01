@@ -4,24 +4,22 @@ import com.aliyun.openservices.ons.api.Message;
 import com.aliyun.openservices.ons.api.ONSFactory;
 import com.aliyun.openservices.ons.api.Producer;
 import com.aliyun.openservices.ons.api.SendResult;
+import org.apache.log4j.Logger;
 
 import java.util.Properties;
 
 public class ProducerService {
 
+    private static final Logger logger = Logger.getLogger(ProducerService.class);
+
     private static Properties mqConfig;
-
-    public void init() {
-
-        System.out.println("000000000000000" + mqConfig);
-    }
 
     public static void send(String code) {
         Producer producer = ONSFactory.createProducer(mqConfig);
         producer.start();
         Message msg = new Message("TY_20181201_CONTROLLER", "CC", code.getBytes());
         SendResult sendResult = producer.send(msg);
-        System.out.println("Send Message success. Message ID is: " + sendResult.getMessageId());
+        logger.info("Send Message success. Message ID is: " + sendResult.getMessageId());
         producer.shutdown();
     }
 

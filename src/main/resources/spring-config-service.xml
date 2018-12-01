@@ -81,14 +81,25 @@
     <bean id="instructService" class="shop.service.InstructService">
     </bean>
 
+    <bean id="alarm" class="shop.mq.Alarm">
+    </bean>
 
-    <bean id="mqConfig" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
-        <property name="location" value="classpath:mq.properties"/>
+    <bean id="mqpConfig" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="location" value="classpath:mqp.properties"/>
         <property name="fileEncoding" value="UTF-8"/>
     </bean>
 
-    <bean id="producerService" class="shop.mq.ProducerService"  init-method="init" lazy-init="false">
-        <property name="mqConfig" ref="mqConfig"/>
+    <bean id="producerService" class="shop.mq.ProducerService" >
+        <property name="mqConfig" ref="mqpConfig"/>
+    </bean>
+
+    <bean id="mqcConfig" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
+        <property name="location" value="classpath:mqc.properties"/>
+        <property name="fileEncoding" value="UTF-8"/>
+    </bean>
+
+    <bean id="consumerService" class="shop.mq.ConsumerService">
+        <property name="mqConfig" ref="mqcConfig"/>
     </bean>
 
     <task:scheduled-tasks>

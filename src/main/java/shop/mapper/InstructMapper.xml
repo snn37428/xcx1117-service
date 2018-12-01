@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="shop.dao.InstructMapper" >
+  <resultMap id="BaseResultMap" type="shop.domain.Instruct" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="modbus_addr" property="modbusAddr" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="pin" property="pin" jdbcType="VARCHAR" />
+    <result column="created" property="created" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, modbus_addr, status, pin, created
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from instruct
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from instruct
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="shop.domain.Instruct" useGeneratedKeys="true" keyProperty="id" >
+    insert into instruct (id, modbus_addr, status, 
+      pin, created)
+    values (#{id,jdbcType=INTEGER}, #{modbusAddr,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, 
+      #{pin,jdbcType=VARCHAR}, #{created,jdbcType=TIMESTAMP})
+  </insert>
+  <insert id="insertSelective" parameterType="shop.domain.Instruct" >
+    insert into instruct
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="modbusAddr != null" >
+        modbus_addr,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="pin != null" >
+        pin,
+      </if>
+      <if test="created != null" >
+        created,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="modbusAddr != null" >
+        #{modbusAddr,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="pin != null" >
+        #{pin,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null" >
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="shop.domain.Instruct" >
+    update instruct
+    <set >
+      <if test="modbusAddr != null" >
+        modbus_addr = #{modbusAddr,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="pin != null" >
+        pin = #{pin,jdbcType=VARCHAR},
+      </if>
+      <if test="created != null" >
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="shop.domain.Instruct" >
+    update instruct
+    set modbus_addr = #{modbusAddr,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      pin = #{pin,jdbcType=VARCHAR},
+      created = #{created,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

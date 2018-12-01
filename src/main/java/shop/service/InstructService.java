@@ -5,6 +5,7 @@ import org.apache.log4j.Logger;
 import org.springframework.util.StringUtils;
 import shop.dao.InstructMapper;
 import shop.domain.Instruct;
+import shop.mq.Alarm;
 import shop.mq.ProducerService;
 
 import javax.annotation.Resource;
@@ -16,6 +17,9 @@ public class InstructService {
 
     @Resource
     private InstructMapper instructMapper;
+
+    @Resource
+    private Alarm alarm ;
 
     public void write(String addrsess, String status) {
 
@@ -34,14 +38,14 @@ public class InstructService {
         if (rs > 0) {
             logger.warn("write: insert is success");
         }
-
+        instruct.setId(instruct.getId());
         try {
             ProducerService.send(JSONObject.toJSONString(instruct));
         } catch (Exception e) {
             logger.error("write: mq send is failed, msg : " + JSONObject.toJSONString(instruct));
             logger.error(e);
-            return;
         }
+       alarm.sendAlarmInfo(1,String.valueOf(instruct.getModbusAddr()), String.valueOf(instruct.getStatus()));
         logger.info("write: mq send is success, msg : " + JSONObject.toJSONString(instruct));
     }
 

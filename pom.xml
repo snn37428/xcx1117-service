@@ -21,6 +21,24 @@
   <dependencies>
 
     <dependency>
+      <groupId>org.apache.httpcomponents</groupId>
+      <artifactId>httpclient</artifactId>
+      <version>4.5.6</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.aliyun</groupId>
+      <artifactId>aliyun-java-sdk-dysmsapi</artifactId>
+      <version>1.1.0</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.aliyun</groupId>
+      <artifactId>aliyun-java-sdk-core</artifactId>
+      <version>3.2.8</version>
+    </dependency>
+
+    <dependency>
       <groupId>com.aliyun.openservices</groupId>
       <artifactId>ons-client</artifactId>
       <version>1.7.8.Final</version>
