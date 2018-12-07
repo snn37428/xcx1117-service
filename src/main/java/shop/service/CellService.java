@@ -203,7 +203,7 @@ public class CellService {
         }
         xindate = null;
         xindate = sdf.format(ii.getCreated());
-        logger.info("xin tiao : " + (System.currentTimeMillis() - ks));
+        logger.info("xin--tiao time consuming : " + (System.currentTimeMillis() - ks));
     }
 
     /**
