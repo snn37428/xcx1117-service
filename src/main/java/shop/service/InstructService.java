@@ -40,12 +40,12 @@ public class InstructService {
         }
         instruct.setId(instruct.getId());
         try {
-            ProducerService.send(JSONObject.toJSONString(instruct));
+//            ProducerService.send(JSONObject.toJSONString(instruct));
         } catch (Exception e) {
             logger.error("write: mq send is failed, msg : " + JSONObject.toJSONString(instruct));
             logger.error(e);
         }
-       alarm.sendAlarmInfo(1,String.valueOf(instruct.getModbusAddr()), String.valueOf(instruct.getStatus()));
+//       alarm.sendAlarmInfo(1,String.valueOf(instruct.getModbusAddr()), String.valueOf(instruct.getStatus()));
         logger.info("write: mq send is success, msg : " + JSONObject.toJSONString(instruct));
     }
 

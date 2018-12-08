@@ -2,16 +2,14 @@ package shop.domain;
 
 import java.util.Date;
 
-public class Instruct {
+public class Auth {
     private Integer id;
 
-    private Integer modbusAddr;
+    private String token;
 
     private Integer status;
 
-    private String pin;
-
-    private Integer opStatus;
+    private String phone;
 
     private Date created;
 
@@ -23,12 +21,12 @@ public class Instruct {
         this.id = id;
     }
 
-    public Integer getModbusAddr() {
-        return modbusAddr;
+    public String getToken() {
+        return token;
     }
 
-    public void setModbusAddr(Integer modbusAddr) {
-        this.modbusAddr = modbusAddr;
+    public void setToken(String token) {
+        this.token = token == null ? null : token.trim();
     }
 
     public Integer getStatus() {
@@ -39,20 +37,12 @@ public class Instruct {
         this.status = status;
     }
 
-    public String getPin() {
-        return pin;
+    public String getPhone() {
+        return phone;
     }
 
-    public void setPin(String pin) {
-        this.pin = pin == null ? null : pin.trim();
-    }
-
-    public Integer getOpStatus() {
-        return opStatus;
-    }
-
-    public void setOpStatus(Integer opStatus) {
-        this.opStatus = opStatus;
+    public void setPhone(String phone) {
+        this.phone = phone == null ? null : phone.trim();
     }
 
     public Date getCreated() {

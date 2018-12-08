@@ -2,7 +2,7 @@ package shop.domain;
 
 import java.util.Date;
 
-public class I {
+public class Pant {
 
     private String date;
     private String cDate;

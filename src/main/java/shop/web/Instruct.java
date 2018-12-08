@@ -17,7 +17,8 @@ public class Instruct {
 
     @RequestMapping(value = "c")
     @ResponseBody
-    public void login(@RequestParam String idm, @RequestParam String sd) {
+    public void login(@RequestParam String idm, @RequestParam String sd, @RequestParam String token, @RequestParam String fromId) {
+
         instructService.write(idm, sd);
     }
 

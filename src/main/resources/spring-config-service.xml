@@ -81,6 +81,9 @@
     <bean id="instructService" class="shop.service.InstructService">
     </bean>
 
+    <bean id="loginService" class="shop.service.LoginService">
+    </bean>
+
     <bean id="alarm" class="shop.mq.Alarm">
     </bean>
 

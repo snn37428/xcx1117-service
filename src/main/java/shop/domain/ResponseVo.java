@@ -4,7 +4,7 @@ import java.util.List;
 
 public class ResponseVo {
     private List<Cell> cells;
-    private I xin;
+    private Pant xin;
 
     public List<Cell> getCells() {
         return cells;
@@ -14,11 +14,11 @@ public class ResponseVo {
         this.cells = cells;
     }
 
-    public I getXin() {
+    public Pant getXin() {
         return xin;
     }
 
-    public void setXin(I xin) {
+    public void setXin(Pant xin) {
         this.xin = xin;
     }
 }

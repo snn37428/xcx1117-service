@@ -4,9 +4,8 @@ import org.apache.log4j.Logger;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
-import shop.domain.I;
+import shop.domain.Pant;
 import shop.domain.ResponseVo;
-import shop.mq.ConsumerService;
 import shop.service.CellService;
 
 import javax.annotation.Resource;
@@ -44,9 +43,9 @@ public class ProductCell {
     }
 
 
-    public I xin() {
+    public Pant xin() {
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        I i = new I();
+        Pant i = new Pant();
         i.setDate(sdf.format(new Date()));
         i.setcDate(CellService.getXindate());
         return i;

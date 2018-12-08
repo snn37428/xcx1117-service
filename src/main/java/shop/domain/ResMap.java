@@ -21,6 +21,19 @@ public class ResMap {
     }
 
     /**
+     * 返回失败
+     *
+     * @return
+     */
+    public static Map<String, Object> failedMap(String errMsg) {
+        Map<String, Object> map = new HashMap<String, Object>();
+        map.put("success", false);
+        map.put("data", errMsg);
+        return map;
+    }
+
+
+    /**
      * 返回成功数据
      *
      * @param data 返回的data数据
