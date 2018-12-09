@@ -10,6 +10,8 @@ public class WXLoginFinal {
 
     private static final String url = "https://api.weixin.qq.com/sns/jscode2session?";
 
+    private static final String WXTemplateURL = "https://api.weixin.qq.com/cgi-bin/token";
+
     private static final int day = 24 * 60 * 60 * 1;
 
     private static final int timeOut = 3 * getDay();
@@ -42,4 +44,7 @@ public class WXLoginFinal {
         return timeOut;
     }
 
+    public static String getWXTemplateURL() {
+        return WXTemplateURL;
+    }
 }

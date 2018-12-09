@@ -52,8 +52,8 @@
         </javaClientGenerator>
 
         <!-- 指定数据库表-->
-        <table tableName="1"
-               domainObjectName="Auth"
+        <table tableName="2"
+               domainObjectName="Instruct"
                enableCountByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"

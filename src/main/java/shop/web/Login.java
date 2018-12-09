@@ -15,7 +15,6 @@ import java.util.Map;
 
 @Controller
 @RequestMapping("/login")
-
 public class Login {
 
     private final static Logger log = LogManager.getLogger(LoginService.class);
@@ -26,7 +25,6 @@ public class Login {
     @RequestMapping(value = "in")
     @ResponseBody
     public Map login(@RequestParam String code) {
-        System.out.println("--------------------------------------------login" + code);
         if (StringUtils.isEmpty(code)) {
             log.warn("login in null");
             return ResMap.failedMap();
