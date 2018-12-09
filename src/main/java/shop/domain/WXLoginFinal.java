@@ -10,7 +10,7 @@ public class WXLoginFinal {
 
     private static final String url = "https://api.weixin.qq.com/sns/jscode2session?";
 
-    private static final String WXTemplateURL = "https://api.weixin.qq.com/cgi-bin/token";
+    private static final String WXTemplateURL = "https://api.weixin.qq.com/cgi-bin/message/wxopen/template/send";
 
     private static final int day = 24 * 60 * 60 * 1;
 

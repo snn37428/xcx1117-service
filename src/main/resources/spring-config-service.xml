@@ -85,8 +85,7 @@
     </bean>
 
     <bean id="callBackService" class="shop.service.CallBackService">
-        <property name="WXTemplateCode" value="02d_PxhPdkE5x23iPGCRbPFXE0uT8RisH5rRFC_jeUM"></property>
-        <property name="WXTemplateURL" value=""></property>
+        <property name="wxTemplateCode" value="02d_PxhPdkE5x23iPGCRbPFXE0uT8RisH5rRFC_jeUM"></property>
     </bean>
 
     <bean id="accessTokenService" class="shop.service.AccessTokenService">

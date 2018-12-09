@@ -25,8 +25,7 @@ public class CallBackService {
 
 
     private static final Logger logger = Logger.getLogger(CallBackService.class);
-    private static String WXTemplateURL;
-    private static String WXTemplateCode;
+    private static String wxTemplateCode;
 
     /**
      * 发送模板信息
@@ -38,16 +37,27 @@ public class CallBackService {
                 logger.error("sendTemplateMsg msg is null");
                 return;
             }
+            logger.error("=========================================" + rs);
             Map<String,TemplateData> map = new HashMap<String,TemplateData>();
             map.put("keyword1",new TemplateData(rs.getpDesc()));
             map.put("keyword2",new TemplateData(String.valueOf(rs.getModbusAddr())));
             map.put("keyword3",new TemplateData(rs.getStatus() == 1 ? "已开启":"以关闭"));
+
+            logger.error("======================getpDesc===================" + rs.getpDesc());
+            logger.error("======================getModbusAddr===================" + rs.getModbusAddr());
+            logger.error("======================getStatus===================" + (rs.getStatus() == 1 ? "已开启":"以关闭"));
+
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String date = sdf.format(new Date());
             map.put("keyword4",new TemplateData(date));
             String r = Md5Utils.convertMD5(rs.getToken());
             String x = Md5Utils.convertMD5(r);
+
             sendTemplateMessage(x, "", rs.getFromid(), map);
+            logger.error("======================rs.getToken()===================" + rs.getToken());
+            logger.error("======================r===================" + r);
+            logger.error("======================x===================" + x);
+
         } catch (Exception e) {
             logger.error("sendTemplateMsg msg is Exception" + e);
         }
@@ -57,15 +67,15 @@ public class CallBackService {
     public static JSONObject sendTemplateMessage(String openId, String page, String formid, Map<String, TemplateData> map){
         String accessToken = AccessTokenService.getAccessToken();
         SendTemplateMessage sendTemplateMessage = new SendTemplateMessage();
-        sendTemplateMessage.setTouser(openId);//openid
-        sendTemplateMessage.setTemplate_id(WXLoginFinal.getWXTemplateURL());//templateId
+        sendTemplateMessage.setTouser("okyMN0SIa4m_z39M4iNU4ka0E0AY");//openid
+        sendTemplateMessage.setTemplate_id(wxTemplateCode);//templateId
         sendTemplateMessage.setPage(page);
         sendTemplateMessage.setForm_id(formid);
         sendTemplateMessage.setData(map);
         sendTemplateMessage.setEmphasis_keyword("");
         String param =  JSONObject.toJSONString(sendTemplateMessage);
-        logger.info("sendTemplateMessage send msg: -------------- " + param);
-        pushOneUser(param);
+        logger.info("sendTemplateMessage send msg: --------00000000000------ " + param);
+        pushOneUser(param, accessToken);
         return null;
 
     }
@@ -76,10 +86,10 @@ public class CallBackService {
      * @param param
      * @return
      */
-    public static String pushOneUser(String param) {
+    public static String pushOneUser(String param, String accessToken) {
         try {
             HttpClient httpclient = HttpClients.createDefault();
-            HttpPost httppost = new HttpPost(WXTemplateURL);
+            HttpPost httppost = new HttpPost(WXLoginFinal.getWXTemplateURL() + "?access_token=" + accessToken);
             httppost.addHeader("Content-Type", "application/json; charset=utf-8");
             StringEntity strEnt = new StringEntity(param, "utf-8");
             httppost.setEntity(strEnt);
@@ -95,28 +105,21 @@ public class CallBackService {
     }
 
     public static void main(String[] args) {
-        Map<String,TemplateData> map = new HashMap<String,TemplateData>();
-        map.put("keyword1",new TemplateData("339208499"));
-        map.put("keyword2",new TemplateData("2018年9月30日16:33:44"));
-        map.put("keyword3",new TemplateData("***总部"));
-        map.put("keyword4",new TemplateData("*****学院"));
-        JSONObject js = sendTemplateMessage("o89rs0M0EIzrkiN9Va88mFbQyUdQ", "", "1539830935602",map);
-        System.out.println(js);
+//        Map<String,TemplateData> map = new HashMap<String,TemplateData>();
+//        map.put("keyword1",new TemplateData("339208499"));
+//        map.put("keyword2",new TemplateData("2018年9月30日16:33:44"));
+//        map.put("keyword3",new TemplateData("***总部"));
+//        map.put("keyword4",new TemplateData("*****学院"));
+//        JSONObject js = sendTemplateMessage("o89rs0M0EIzrkiN9Va88mFbQyUdQ", "", "1539830935602",map);
+//        System.out.println(js);
+        String  er = "043f91295b3582f266abd69c07baa86a";
+        String r = Md5Utils.convertMD5(er);
+        String x = Md5Utils.convertMD5(r);
+        System.out.println(r);
+        System.out.println(x);
     }
 
-    public static String getWXTemplateURL() {
-        return WXTemplateURL;
-    }
-
-    public static void setWXTemplateURL(String WXTemplateURL) {
-        CallBackService.WXTemplateURL = WXTemplateURL;
-    }
-
-    public static String getWXTemplateCode() {
-        return WXTemplateCode;
-    }
-
-    public static void setWXTemplateCode(String WXTemplateCode) {
-        CallBackService.WXTemplateCode = WXTemplateCode;
+    public static void setWxTemplateCode(String wxTemplateCode) {
+        CallBackService.wxTemplateCode = wxTemplateCode;
     }
 }
