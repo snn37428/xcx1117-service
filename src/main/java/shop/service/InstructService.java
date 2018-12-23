@@ -36,10 +36,8 @@ public class InstructService {
         String x = Md5Utils.convertMD5(r);
         instruct.setToken(x);
         instruct.setFromid(fromId);
-        instruct.setpDesc(desc);
+        instruct.setpDesc("控制" + desc);
         instruct.setCreated(new Date());
-        logger.error("write--------------------" + JSONObject.toJSONString(instruct));
-
         try {
             int rs = instructMapper.insert(instruct);
             if (rs > 0) {
@@ -57,7 +55,7 @@ public class InstructService {
             logger.error(e);
         }
         alarm.sendAlarmInfo(1, String.valueOf(instruct.getModbusAddr()), String.valueOf(instruct.getStatus()));
-        logger.info("write: mq send is success, msg : " + JSONObject.toJSONString(instruct));
+        logger.info("write data and send message and mq send is success, msg : " + JSONObject.toJSONString(instruct));
     }
 
 }

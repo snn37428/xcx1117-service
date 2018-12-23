@@ -9,5 +9,7 @@ public interface ConfigMapper {
 
     List<Config> readConfig();
 
+    Config getConfig(Integer address);
+
     AlarmDo selectMan();
 }

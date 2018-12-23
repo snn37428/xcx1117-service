@@ -29,6 +29,12 @@
         from config where group_code in (1,2,3)
     </select>
 
+  <select id="getConfig" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select`id` ,`config_id` ,`p_name` ,`p_desc`,`p_type` ,`model`,`modbus_addr`,`group_code`
+        from config where modbus_addr = #{address}
+    </select>
+
+
   <select id="selectMan" resultMap="ResultAlarmMap">
         select`man_switch` ,`read_switch` ,`write_switch` ,`dingding_switch`,`dingding_alarm` ,`list_mobies`,`list_cells`
         from alarm  where id  = 1

@@ -10,6 +10,7 @@ import shop.domain.Auth;
 import shop.domain.HttpRequest;
 import shop.domain.ResMap;
 import shop.domain.WXLoginFinal;
+import shop.uitl.EncryptUtil;
 import shop.uitl.Md5Utils;
 
 import javax.annotation.Resource;
@@ -28,7 +29,7 @@ public class LoginService {
     @Resource
     private AuthMapper authMapper;
 
-    public Map in(String code) {
+    public Map in(String code) throws Exception {
 
         String openId = null;
         try {
@@ -56,10 +57,12 @@ public class LoginService {
         } catch (Exception e) {
             log.error("获取微信openId失败");
         }
-
-        String token = Md5Utils.string2MD5(openId);
+        String key = "9ba45bfd500642328ec03ad8ef1b4321";// 自定义密钥
+        EncryptUtil des = new EncryptUtil(key, "utf-8");
+        String token = des.encode(openId);
         Map resMap = new HashMap();
         resMap.put("token", token);
+        log.error("tokentokentokentokentoken" + token);
 
         try {
             Auth rs = authMapper.selectToken(openId);

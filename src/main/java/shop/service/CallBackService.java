@@ -9,12 +9,12 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
-import shop.domain.Instruct;
-import shop.domain.SendTemplateMessage;
-import shop.domain.TemplateData;
-import shop.domain.WXLoginFinal;
+import shop.dao.ConfigMapper;
+import shop.domain.*;
+import shop.uitl.EncryptUtil;
 import shop.uitl.Md5Utils;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -27,6 +27,9 @@ public class CallBackService {
     private static final Logger logger = Logger.getLogger(CallBackService.class);
     private static String wxTemplateCode;
 
+    @Resource
+    private ConfigMapper configMapper;
+
     /**
      * 发送模板信息
      */
@@ -37,36 +40,31 @@ public class CallBackService {
                 logger.error("sendTemplateMsg msg is null");
                 return;
             }
-            logger.error("=========================================" + rs);
+            Config rsc = configMapper.getConfig(rs.getModbusAddr());
+            if (rsc == null) {
+                logger.error("sendTemplateMsg rsc is null");
+                return;
+            }
             Map<String,TemplateData> map = new HashMap<String,TemplateData>();
-            map.put("keyword1",new TemplateData(rs.getpDesc()));
+            map.put("keyword1",new TemplateData("控制"+rsc.getpDesc()));
             map.put("keyword2",new TemplateData(String.valueOf(rs.getModbusAddr())));
-            map.put("keyword3",new TemplateData(rs.getStatus() == 1 ? "已开启":"以关闭"));
-
-            logger.error("======================getpDesc===================" + rs.getpDesc());
-            logger.error("======================getModbusAddr===================" + rs.getModbusAddr());
-            logger.error("======================getStatus===================" + (rs.getStatus() == 1 ? "已开启":"以关闭"));
-
+            map.put("keyword3",new TemplateData(rs.getStatus() == 1 ? "已开启":"已关闭"));
             SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
             String date = sdf.format(new Date());
             map.put("keyword4",new TemplateData(date));
-            String r = Md5Utils.convertMD5(rs.getToken());
-            String x = Md5Utils.convertMD5(r);
-
-            sendTemplateMessage(x, "", rs.getFromid(), map);
-            logger.error("======================rs.getToken()===================" + rs.getToken());
-            logger.error("======================r===================" + r);
-            logger.error("======================x===================" + x);
-
+            sendTemplateMessage(rs.getToken(), "tyc/tyc", rs.getFromid(), map);
         } catch (Exception e) {
             logger.error("sendTemplateMsg msg is Exception" + e);
         }
     }
 
 
-    public static JSONObject sendTemplateMessage(String openId, String page, String formid, Map<String, TemplateData> map){
+    public static JSONObject sendTemplateMessage(String openId, String page, String formid, Map<String, TemplateData> map) throws Exception {
         String accessToken = AccessTokenService.getAccessToken();
         SendTemplateMessage sendTemplateMessage = new SendTemplateMessage();
+        String key = "9ba45bfd500642328ec03ad8ef1b4321";// 自定义密钥
+        EncryptUtil des = new EncryptUtil(key, "utf-8");
+        String openid = des.decode(des.encode(openId));
         sendTemplateMessage.setTouser("okyMN0SIa4m_z39M4iNU4ka0E0AY");//openid
         sendTemplateMessage.setTemplate_id(wxTemplateCode);//templateId
         sendTemplateMessage.setPage(page);
@@ -74,7 +72,7 @@ public class CallBackService {
         sendTemplateMessage.setData(map);
         sendTemplateMessage.setEmphasis_keyword("");
         String param =  JSONObject.toJSONString(sendTemplateMessage);
-        logger.info("sendTemplateMessage send msg: --------00000000000------ " + param);
+        logger.info("sendTemplateMessage send msg: " + param);
         pushOneUser(param, accessToken);
         return null;
 

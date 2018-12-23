@@ -29,7 +29,12 @@ public class Login {
             log.warn("login in null");
             return ResMap.failedMap();
         }
-        return loginService.in(code);
+        try {
+            return loginService.in(code);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return null;
     }
 
 }
