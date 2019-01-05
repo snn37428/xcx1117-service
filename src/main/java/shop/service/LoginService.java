@@ -11,7 +11,6 @@ import shop.domain.HttpRequest;
 import shop.domain.ResMap;
 import shop.domain.WXLoginFinal;
 import shop.uitl.EncryptUtil;
-import shop.uitl.Md5Utils;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -62,7 +61,6 @@ public class LoginService {
         String token = des.encode(openId);
         Map resMap = new HashMap();
         resMap.put("token", token);
-        log.error("tokentokentokentokentoken" + token);
 
         try {
             Auth rs = authMapper.selectToken(openId);
@@ -71,7 +69,7 @@ public class LoginService {
                 return resMap;
             }
         } catch (Exception e) {
-            log.error("读取数据获取auth状态异常"+ e);
+            log.error("读取数据获取auth状态异常" + e);
         }
 
         try {
@@ -94,25 +92,28 @@ public class LoginService {
 
     /**
      * 验证token
+     *
      * @param token
      * @return
      */
-    public Map auth(String token) {
+    public Map auth(String token) throws Exception {
 
+        String key = "9ba45bfd500642328ec03ad8ef1b4321";// 自定义密钥
+        EncryptUtil des = new EncryptUtil(key, "utf-8");
+        String r = des.decode(token);
+        Map map = new HashMap(2);
+        map.put("auth", false);
         try {
-            Auth rs = authMapper.selectToken(token);
-            Map resMap = new HashMap();
-            resMap.put("token", token);
-            resMap.put("code", 0);
-            if (rs != null && rs.getStatus() == 1) {
-                resMap.put("auth", true);
-                return resMap;
+            Auth auths = authMapper.selectToken(r);
+            if (auths != null) {
+                map.put("auth", true);
+                return map;
             }
-            return ResMap.successMap(resMap);
         } catch (Exception e) {
-            log.error("验证token，异常" + e);
+            log.error("读取数据获取auth状态异常" + e);
+            return map;
         }
-        return ResMap.failedMap("check token is failed");
+        return map;
     }
 
 }

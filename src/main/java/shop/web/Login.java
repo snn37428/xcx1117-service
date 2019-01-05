@@ -37,4 +37,19 @@ public class Login {
         return null;
     }
 
+    @RequestMapping(value = "token")
+    @ResponseBody
+    public Map authToken(@RequestParam String token) {
+        if (StringUtils.isEmpty(token)) {
+            log.warn("token in null");
+            return ResMap.failedMap();
+        }
+        try {
+            return loginService.auth(token);
+        } catch (Exception e) {
+            log.error("authToken is Exception", e);
+        }
+        return ResMap.failedMap();
+    }
+
 }
