@@ -6,6 +6,7 @@ import shop.dao.CellMapper;
 import shop.dao.ConfigMapper;
 import shop.domain.Cell;
 import shop.domain.Config;
+import shop.uitl.EncryptUtil;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
@@ -316,4 +317,5 @@ public class CellService {
     public static void setUrlMap(Map<String, String> urlMap) {
         CellService.urlMap = urlMap;
     }
+
 }

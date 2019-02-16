@@ -64,8 +64,8 @@ public class CallBackService {
         SendTemplateMessage sendTemplateMessage = new SendTemplateMessage();
         String key = "9ba45bfd500642328ec03ad8ef1b4321";// 自定义密钥
         EncryptUtil des = new EncryptUtil(key, "utf-8");
-        String openid = des.decode(des.encode(openId));
-        sendTemplateMessage.setTouser("okyMN0SIa4m_z39M4iNU4ka0E0AY");//openid
+        String openid = des.decode(openId);
+        sendTemplateMessage.setTouser(openid);//openid
         sendTemplateMessage.setTemplate_id(wxTemplateCode);//templateId
         sendTemplateMessage.setPage(page);
         sendTemplateMessage.setForm_id(formid);
@@ -77,6 +77,7 @@ public class CallBackService {
         return null;
 
     }
+
 
     /**
      * 推送
@@ -103,13 +104,18 @@ public class CallBackService {
     }
 
     public static void main(String[] args) {
-//        Map<String,TemplateData> map = new HashMap<String,TemplateData>();
-//        map.put("keyword1",new TemplateData("339208499"));
-//        map.put("keyword2",new TemplateData("2018年9月30日16:33:44"));
-//        map.put("keyword3",new TemplateData("***总部"));
-//        map.put("keyword4",new TemplateData("*****学院"));
-//        JSONObject js = sendTemplateMessage("o89rs0M0EIzrkiN9Va88mFbQyUdQ", "", "1539830935602",map);
-//        System.out.println(js);
+        Map<String,TemplateData> map = new HashMap<String,TemplateData>();
+        map.put("keyword1",new TemplateData("339208499"));
+        map.put("keyword2",new TemplateData("2018年9月30日16:33:44"));
+        map.put("keyword3",new TemplateData("***总部"));
+        map.put("keyword4",new TemplateData("*****学院"));
+        JSONObject js = null;
+        try {
+            js = sendTemplateMessage("okyMN0SIa4m_z39M4iNU4ka0E0AY", "", "1539830935602",map);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        System.out.println(js);
         String  er = "043f91295b3582f266abd69c07baa86a";
         String r = Md5Utils.convertMD5(er);
         String x = Md5Utils.convertMD5(r);

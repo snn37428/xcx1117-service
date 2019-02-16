@@ -68,8 +68,8 @@ public class EncryptUtil {
 
     public static void main(String[] args) {
         try {
-            String test = "ershuai";
-            String key = "9ba45bfd500642328ec03ad8ef1b6e75";// 自定义密钥
+            String test = "okyMN0SIa4m_z39M4iNU4ka0E0AY";
+            String key = "9ba45bfd500642328ec03ad8ef1b4321";// 自定义密钥
             EncryptUtil des = new EncryptUtil(key, "utf-8");
             System.out.println("加密前的字符：" + test);
             System.out.println("加密后的字符：" + des.encode(test));

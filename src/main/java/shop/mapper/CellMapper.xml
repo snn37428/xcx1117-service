@@ -19,21 +19,21 @@
   <select id="selectByAddress" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
     <include refid="Base_Column_List" />
-    from plc_pro_50
+    from plc_pro
     where modbus_addr = #{modbusAddr} order by created desc limit 1
   </select>
 
   <select id="i" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from plc_pro_50 order by created desc limit 1
+    from plc_pro order by created desc limit 1
   </select>
 
   <!--mondel 组Id-->
   <select id="readSort" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
         <include refid="Base_Column_List"/>
-        from plc_pro_50 where model = #{model} order by created desc limit 0, #{pageSize};
+        from plc_pro where model = #{model} order by created desc limit 0, #{pageSize};
     </select>
 
 </mapper>

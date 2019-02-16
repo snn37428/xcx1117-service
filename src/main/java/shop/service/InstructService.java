@@ -32,9 +32,9 @@ public class InstructService {
         Instruct instruct = new Instruct();
         instruct.setModbusAddr(Integer.parseInt(addrsess));
         instruct.setStatus(Integer.parseInt(status));
-        String r = Md5Utils.convertMD5(token);
-        String x = Md5Utils.convertMD5(r);
-        instruct.setToken(x);
+//        String r = Md5Utils.convertMD5(token);
+//        String x = Md5Utils.convertMD5(r);
+        instruct.setToken(token);
         instruct.setFromid(fromId);
         instruct.setpDesc("控制" + desc);
         instruct.setCreated(new Date());
