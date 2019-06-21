@@ -99,7 +99,7 @@ public class Alarm {
 
         switch (code) {
             case 1: {
-                Map<String, String> mapMsg = new HashMap<String, String>(1);
+                Map<String, String> mapMsg = new HashMap<String, String>(2);
                 Date d = new Date();
                 SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
                 mapMsg.put("dot", address);
@@ -108,6 +108,13 @@ public class Alarm {
                 String singName = "甜圆云控制";
                 send(mapMsg, template, singName);
                 sendDDingAlarmInfo("甜圆云控制：控制状态变更，控制点"+address +"状态置为"+status +"");
+                break;
+            }
+            case 2: {
+                String template = "SMS_152543131";
+                String singName = "甜圆云通知";
+                send(new HashMap<String, String>(2), template, singName);
+                sendDDingAlarmInfo("甜圆云通知：无人值守，单位小时内云库没有数据更新。生产基地设备掉电或网络异常，请处理。");
                 break;
             }
         }

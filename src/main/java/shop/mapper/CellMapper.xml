@@ -36,4 +36,9 @@
         from plc_pro where model = #{model} order by created desc limit 0, #{pageSize};
     </select>
 
+  <select id="count" resultType="java.lang.Long">
+    select count(1)
+    from plc_pro
+  </select>
+
 </mapper>

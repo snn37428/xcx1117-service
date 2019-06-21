@@ -25,4 +25,6 @@ public interface CellMapper {
      * @return
      */
     List<Cell> readSort(@Param("model")int model, @Param("pageSize")int pageSize);
+
+    long count();
 }

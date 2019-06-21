@@ -94,6 +94,9 @@
     <bean id="alarm" class="shop.mq.Alarm">
     </bean>
 
+    <bean id="alarmService" class="shop.service.AlarmService">
+    </bean>
+
     <bean id="mqpConfig" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
         <property name="location" value="classpath:mqp.properties"/>
         <property name="fileEncoding" value="UTF-8"/>
@@ -125,6 +128,8 @@
         <task:scheduled ref="accessTokenService" method="init" cron="0 0 */1 * * ?"/>
         <!--<task:scheduled ref="alarm" method="taskAlarmConfig" cron="*/10 * * * * ?"/>-->
 
+        <!--无人值守-->
+        <task:scheduled ref="alarmService" method="task" cron="0 */30 * * * ?"/>
     </task:scheduled-tasks>
 
 </beans>
