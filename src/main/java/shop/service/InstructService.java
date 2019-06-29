@@ -7,7 +7,6 @@ import shop.dao.InstructMapper;
 import shop.domain.Instruct;
 import shop.mq.Alarm;
 import shop.mq.ProducerService;
-import shop.uitl.Md5Utils;
 
 import javax.annotation.Resource;
 import java.util.Date;

@@ -9,6 +9,7 @@ import org.apache.http.entity.StringEntity;
 import org.apache.http.impl.client.HttpClients;
 import org.apache.http.util.EntityUtils;
 import org.apache.log4j.Logger;
+import org.springframework.stereotype.Service;
 import shop.dao.ConfigMapper;
 import shop.domain.*;
 import shop.uitl.EncryptUtil;
@@ -20,7 +21,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
-
+@Service
 public class CallBackService {
 
 

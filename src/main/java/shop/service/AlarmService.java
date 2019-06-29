@@ -36,14 +36,14 @@ public class AlarmService {
     }
 
 
-    public void task(){
+    public void task() {
         try {
             long ll = cellMapper.count();
             if (ll <= 0) {
                 logger.error("task count is error");
             }
-            if(l == ll) {
-                alarm.sendAlarmInfo(2,"","");
+            if (l == ll) {
+                alarm.sendAlarmInfo(2, "", "");
                 logger.error("alarm is true online is error");
                 return;
             }
@@ -51,6 +51,20 @@ public class AlarmService {
         } catch (Exception e) {
             logger.error("task is exception : ", e);
         }
+    }
+
+    /**
+     * 发送钉钉控制时候的token
+     */
+    public void sendDingDingToken(String token) {
+        alarm.sendDDingAlarmInfo("甜圆权限：token码授权，token=" + token);
+    }
+
+    /**
+     * 登录消息推送
+     */
+    public void sendDingDingLogin(String token) {
+        alarm.sendDDingAlarmInfo("甜圆登录统计，登录token=" + token);
     }
 
 }
