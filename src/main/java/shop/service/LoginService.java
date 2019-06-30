@@ -6,11 +6,9 @@ import org.apache.log4j.LogManager;
 import org.apache.log4j.Logger;
 import org.springframework.stereotype.Service;
 import shop.dao.AuthMapper;
-import shop.domain.Auth;
-import shop.domain.HttpRequest;
-import shop.domain.ResMap;
-import shop.domain.WXLoginFinal;
+import shop.domain.*;
 import shop.uitl.EncryptUtil;
+import shop.val.VideoAuthMapper;
 
 import javax.annotation.Resource;
 import java.util.Date;
@@ -27,6 +25,9 @@ public class LoginService {
 
     @Resource
     private AuthMapper authMapper;
+
+    @Resource
+    private VideoAuthMapper videoAuthMapper;
 
     public Map in(String code) throws Exception {
 
@@ -116,4 +117,31 @@ public class LoginService {
         return map;
     }
 
+    /**
+     * 申请控制生产权限
+     *
+     * @param token
+     */
+    public Map authSC(String token, String code) {
+        Map resMap = new HashMap();
+        resMap.put("success", false);
+        VideoAuth v = new VideoAuth();
+        v.setStatus(0);
+        v.setToken(token);
+        v.setAuth(Integer.parseInt(code));
+        v.setAccredit(0);
+        try {
+            int vi = videoAuthMapper.insert(v);
+            resMap.put("success", true);
+            resMap.put("code", v.getId());
+            log.info("authSC apply, token:" + token);
+            return resMap;
+        } catch (Exception e) {
+            log.error("authSC is exception, e:" + e);
+            return resMap;
+        }
+    }
+
 }
+
+

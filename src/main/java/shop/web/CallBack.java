@@ -28,6 +28,9 @@ public class CallBack {
     @Resource
     private VideoService videoService;
 
+    @Resource
+    private LoginService loginService;
+
     @RequestMapping(value = "back")
     @ResponseBody
     public Map login(@RequestParam String data) {
@@ -54,6 +57,39 @@ public class CallBack {
     @ResponseBody
     public Map jw(@RequestParam String jw) {
         log.info("jw request ------ jw:" + jw);
-         return videoService.getTokenByJw(jw);
+        return videoService.getTokenByJw(jw);
     }
+
+    /**
+     * 生产控制权限申请
+     *
+     * @param token
+     * @param code
+     */
+    @RequestMapping(value = "csc")
+    @ResponseBody
+    public Map csc(@RequestParam String token, @RequestParam String code) {
+        if (StringUtils.isEmpty(token) || StringUtils.isEmpty(code)) {
+            log.warn("csc token is black or ss is black");
+        }
+        log.info("csc is request ------ token:" + token + "  code:" + code);
+        return loginService.authSC(token, code);
+    }
+
+    /**
+     * 云台控制权限申请
+     *
+     * @param token
+     * @param code
+     */
+    @RequestMapping(value = "css")
+    @ResponseBody
+    public void css(@RequestParam String token, @RequestParam String code) {
+        if (StringUtils.isEmpty(token) || StringUtils.isEmpty(code)) {
+            log.warn("css token is black or ss is black");
+        }
+        log.info("css is request ------ token:" + token + "  code:" + code);
+//        videoService.HttpClientGet(tt, s);
+    }
+
 }

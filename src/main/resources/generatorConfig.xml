@@ -52,7 +52,7 @@
         </javaClientGenerator>
 
         <!-- 指定数据库表-->
-        <table tableName="2"               domainObjectName="VideoJW"
+        <table tableName="2"               domainObjectName="VideoAuth"
                enableCountByExample="false"
                enableDeleteByExample="false"
                enableSelectByExample="false"
