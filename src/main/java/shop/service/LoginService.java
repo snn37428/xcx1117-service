@@ -130,9 +130,17 @@ public class LoginService {
         if ("ss".equals(code)) {
             log.info("authSC apply, video code:" + code);
             v.setAuth(1);
+            VideoAuth k = videoAuthMapper.selectByTokenForAuth1(token);
+            if (k == null) {
+                resMap.put("auth", "nul");
+            }
         } else if ("sc".equals(code)) {
             log.info("authSC apply, product code:" + code);
             v.setAuth(2);
+            VideoAuth k = videoAuthMapper.selectByTokenForAuth1(token);
+            if (k == null) {
+                resMap.put("auth", "nul");
+            }
         }
         v.setStatus(0);
         v.setCreated(new Date());
@@ -181,11 +189,16 @@ public class LoginService {
     public Map authCKS(String token, String code) {
         Map resMap = new HashMap();
         resMap.put("success", false);
-        VideoAuth vs = new VideoAuth();
-        vs.setId(Integer.parseInt(code));
-        vs.setStatus(1);
+
+        VideoAuth videoAuth = videoAuthMapper.selectByPrimaryKey(Integer.parseInt(code));
+        if (videoAuth == null || StringUtils.isBlank(videoAuth.getToken())) {
+            resMap.put("success", true);
+            resMap.put("auth", "nul");
+            return resMap;
+        }
+
         try {
-            int v = videoAuthMapper.updateByPrimaryKey(vs);
+            int v = videoAuthMapper.updateByToken(Integer.parseInt(code));
             if (v == 0) {
                 return resMap;
             }
