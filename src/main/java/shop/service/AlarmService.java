@@ -76,9 +76,9 @@ public class AlarmService {
         Map<String, String> mapMsg = new HashMap<String, String>(2);
         mapMsg.put("type", type);
         mapMsg.put("code", code);
-        String template = "SMS_169640064";
-        String singName = "权限申请";
-        alarm.send(new HashMap<String, String>(2), template, singName);
+        String template = "SMS_169635073";
+        String singName = "甜圆云通知";
+        alarm.send(mapMsg, template, singName);
     }
 
 }

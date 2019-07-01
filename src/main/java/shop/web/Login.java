@@ -53,13 +53,13 @@ public class Login {
         log.warn("token is controller is start(code mi) =" + t);
         alarmService.sendDingDingToken(t);
         Map map = new HashMap(2);
-        map.put("auth", false);
+        map.put("success", false);
         if (StringUtils.isEmpty(t)) {
             log.warn("token in null");
             return map;
         }
         try {
-            return loginService.auth(t);
+            return loginService.authProduct(t);
         } catch (Exception e) {
             log.error("authToken is Exception", e);
             return map;

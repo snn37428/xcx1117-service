@@ -125,19 +125,44 @@ public class LoginService {
     }
 
     /**
+     * 验证生产token
+     *
+     * @param token
+     * @return
+     */
+    public Map authProduct(String token) throws Exception {
+        Map resMap = new HashMap();
+        resMap.put("success", false);
+        try {
+            List<VideoAuth> vks = videoAuthMapper.selectByTokenForAuth2(token);
+            if (vks.size() == 0) {
+                resMap.put("success", true);
+                resMap.put("auth", "nu");
+                return resMap;
+            }
+        } catch (Exception e) {
+            log.error("authProduct is exception, e:" + e);
+            return resMap;
+        }
+        resMap.put("success", true);
+        return resMap;
+    }
+
+
+    /**
      * 申请控制权限
      *
      * @param token
      */
     public Map authSC(String token, String code) {
-
+        String type = "";
         Map resMap = new HashMap();
         resMap.put("success", false);
         VideoAuth v = new VideoAuth();
         if ("ss".equals(code)) {
             log.info("authSC apply, video code:" + code);
             v.setAuth(1);
-            alarmService.sendPhoneMessage("云台控制", code);
+            type = "：云台控制";
             try {
                 List<VideoAuth> k = videoAuthMapper.selectByTokenForAuth1(token);
                 if (k.size() >= 1) {
@@ -147,12 +172,13 @@ public class LoginService {
                 }
             } catch (Exception e) {
                 log.error("selectByTokenForAuth1 is exception, e:" + e);
+                return resMap;
             }
 
         } else if ("sc".equals(code)) {
             log.info("authSC apply, product code:" + code);
             v.setAuth(2);
-            alarmService.sendPhoneMessage("生产控制", code);
+            type = ":生产控制";
             try {
                 List<VideoAuth> k = videoAuthMapper.selectByTokenForAuth2(token);
                 if (k.size() >= 1) {
@@ -162,6 +188,7 @@ public class LoginService {
                 }
             } catch (Exception e) {
                 log.error("selectByTokenForAuth2 is exception, e:" + e);
+                return resMap;
             }
         }
         v.setStatus(0);
@@ -173,6 +200,7 @@ public class LoginService {
             int vi = videoAuthMapper.insert(v);
             resMap.put("success", true);
             resMap.put("code", v.getId());
+            alarmService.sendPhoneMessage(type, String.valueOf(v.getId()));
             log.info("authSC apply, token:" + token);
             return resMap;
         } catch (Exception e) {
@@ -211,7 +239,6 @@ public class LoginService {
     public Map authCKS(String token, String code) {
         Map resMap = new HashMap();
         resMap.put("success", false);
-
         VideoAuth videoAuth = videoAuthMapper.selectByPrimaryKey(Integer.parseInt(code));
         if (videoAuth == null || StringUtils.isBlank(videoAuth.getToken())) {
             resMap.put("success", true);
@@ -238,14 +265,14 @@ public class LoginService {
      * @param token sc 是云台控制权限
      * @return
      */
-    public Map getAuthAndRuest(String token, String cc) {
+    public Map getAuthAndRuest(String token, String cc, String usrToken) {
         if (StringUtils.isBlank(token)) {
             log.info("getAuthAndRuest token is blank");
         }
         Map resMap = new HashMap();
         resMap.put("success", false);
         try {
-            List<VideoAuth> vk = videoAuthMapper.selectByTokenForAuth1(token);
+            List<VideoAuth> vk = videoAuthMapper.selectByTokenForAuth1(usrToken);
             if (vk.size() == 0) {
                 resMap.put("success", true);
                 resMap.put("auth", "nu");
