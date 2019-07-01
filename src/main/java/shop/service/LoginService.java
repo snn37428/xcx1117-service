@@ -118,23 +118,78 @@ public class LoginService {
     }
 
     /**
-     * 申请控制生产权限
+     * 申请控制权限
      *
      * @param token
      */
     public Map authSC(String token, String code) {
+
         Map resMap = new HashMap();
         resMap.put("success", false);
         VideoAuth v = new VideoAuth();
+        if ("ss".equals(code)) {
+            log.info("authSC apply, video code:" + code);
+            v.setAuth(1);
+        } else if ("sc".equals(code)) {
+            log.info("authSC apply, product code:" + code);
+            v.setAuth(2);
+        }
         v.setStatus(0);
+        v.setCreated(new Date());
         v.setToken(token);
-        v.setAuth(Integer.parseInt(code));
         v.setAccredit(0);
+        v.setCreated(new Date());
         try {
             int vi = videoAuthMapper.insert(v);
             resMap.put("success", true);
             resMap.put("code", v.getId());
             log.info("authSC apply, token:" + token);
+            return resMap;
+        } catch (Exception e) {
+            log.error("authSC is exception, e:" + e);
+            return resMap;
+        }
+    }
+
+    /**
+     * 申请控制权限
+     *
+     * @param token
+     */
+    public Map authCK(String token) {
+        Map resMap = new HashMap();
+        resMap.put("success", false);
+        try {
+            VideoAuth v = videoAuthMapper.selectByAccredit(token);
+            if (v == null) {
+                return resMap;
+            }
+            resMap.put("success", true);
+            return resMap;
+        } catch (Exception e) {
+            log.error("authSC is exception, e:" + e);
+            return resMap;
+        }
+    }
+
+
+    /**
+     * code 授权
+     *
+     * @param token
+     */
+    public Map authCKS(String token, String code) {
+        Map resMap = new HashMap();
+        resMap.put("success", false);
+        VideoAuth vs = new VideoAuth();
+        vs.setId(Integer.parseInt(code));
+        vs.setStatus(1);
+        try {
+            int v = videoAuthMapper.updateByPrimaryKey(vs);
+            if (v == 0) {
+                return resMap;
+            }
+            resMap.put("success", true);
             return resMap;
         } catch (Exception e) {
             log.error("authSC is exception, e:" + e);

@@ -1,5 +1,7 @@
 package shop.domain;
 
+import java.util.Date;
+
 public class VideoAuth {
     private Integer id;
 
@@ -10,6 +12,8 @@ public class VideoAuth {
     private Integer accredit;
 
     private Integer auth;
+
+    private Date created;
 
     public Integer getId() {
         return id;
@@ -49,5 +53,13 @@ public class VideoAuth {
 
     public void setAuth(Integer auth) {
         this.auth = auth;
+    }
+
+    public Date getCreated() {
+        return created;
+    }
+
+    public void setCreated(Date created) {
+        this.created = created;
     }
 }

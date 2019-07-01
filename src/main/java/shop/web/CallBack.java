@@ -14,6 +14,7 @@ import shop.service.LoginService;
 import shop.service.VideoService;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.Map;
 
 @Controller
@@ -61,7 +62,7 @@ public class CallBack {
     }
 
     /**
-     * 生产控制权限申请
+     * 控制权限申请
      *
      * @param token
      * @param code
@@ -70,26 +71,48 @@ public class CallBack {
     @ResponseBody
     public Map csc(@RequestParam String token, @RequestParam String code) {
         if (StringUtils.isEmpty(token) || StringUtils.isEmpty(code)) {
+            Map resMap = new HashMap();
+            resMap.put("success", false);
             log.warn("csc token is black or ss is black");
+            return resMap;
         }
         log.info("csc is request ------ token:" + token + "  code:" + code);
         return loginService.authSC(token, code);
     }
 
     /**
-     * 云台控制权限申请
+     * 授权
      *
      * @param token
+     */
+    @RequestMapping(value = "ck")
+    @ResponseBody
+    public Map ck(@RequestParam String token) {
+        if (StringUtils.isEmpty(token) ) {
+            Map resMap = new HashMap();
+            resMap.put("success", false);
+            log.warn("ck token is black");
+            return resMap;
+        }
+        log.info("ck is request ------ token:" + token );
+        return loginService.authCK(token);
+    }
+
+    /**
+     * 授权
      * @param code
      */
-    @RequestMapping(value = "css")
+    @RequestMapping(value = "wk")
     @ResponseBody
-    public void css(@RequestParam String token, @RequestParam String code) {
+    public Map wk(@RequestParam String token, @RequestParam String code) {
         if (StringUtils.isEmpty(token) || StringUtils.isEmpty(code)) {
-            log.warn("css token is black or ss is black");
+            Map resMap = new HashMap();
+            resMap.put("success", false);
+            log.warn("cks token is black or ss is black");
+            return resMap;
         }
-        log.info("css is request ------ token:" + token + "  code:" + code);
-//        videoService.HttpClientGet(tt, s);
+        log.info("csc is request ------ code:" + code);
+        return loginService.authCKS("", code);
     }
 
 }
