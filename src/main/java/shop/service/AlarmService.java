@@ -6,6 +6,8 @@ import shop.mq.Alarm;
 
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author: snn
@@ -65,6 +67,18 @@ public class AlarmService {
      */
     public void sendDingDingLogin(String token) {
         alarm.sendDDingAlarmInfo("甜圆登录统计，登录token=" + token);
+    }
+
+    /**
+     *  申请权限短信报警
+     */
+    public void sendPhoneMessage(String type, String code){
+        Map<String, String> mapMsg = new HashMap<String, String>(2);
+        mapMsg.put("type", type);
+        mapMsg.put("code", code);
+        String template = "SMS_169640064";
+        String singName = "权限申请";
+        alarm.send(new HashMap<String, String>(2), template, singName);
     }
 
 }

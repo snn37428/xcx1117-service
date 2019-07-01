@@ -46,12 +46,13 @@ public class CallBack {
 
     @RequestMapping(value = "cc")
     @ResponseBody
-    public void cc(@RequestParam String tt, @RequestParam String s) {
+    public Map cc(@RequestParam String tt, @RequestParam String s) {
         if (StringUtils.isEmpty(s) || StringUtils.isEmpty(tt)) {
             log.warn("Controller Video token is black or ss is black");
         }
         log.info("Controller Video is request ------ token:" + tt + "  s:" + s);
-        videoService.HttpClientGet(tt, s);
+//        videoService.HttpClientGet(tt, s);
+      return loginService.getAuthAndRuest(tt, s);
     }
 
     @RequestMapping(value = "jw")

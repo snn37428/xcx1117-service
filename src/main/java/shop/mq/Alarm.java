@@ -123,7 +123,7 @@ public class Alarm {
     /**
      * 短信循环电话号码报警
      */
-    private void send(Map<String, String> mapMsg, String template, String singName) {
+    public void send(Map<String, String> mapMsg, String template, String singName) {
         try {
             for (String p : listPhone) {
                 if (StringUtils.isNotBlank(p)) {
