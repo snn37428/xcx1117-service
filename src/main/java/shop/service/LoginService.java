@@ -159,7 +159,7 @@ public class LoginService {
         Map resMap = new HashMap();
         resMap.put("success", false);
         VideoAuth v = new VideoAuth();
-        if ("ss".equals(code)) {
+        if ("sc".equals(code)) {
             log.info("authSC apply, video code:" + code);
             v.setAuth(1);
             type = "：云台控制";
@@ -175,7 +175,7 @@ public class LoginService {
                 return resMap;
             }
 
-        } else if ("sc".equals(code)) {
+        } else if ("ss".equals(code)) {
             log.info("authSC apply, product code:" + code);
             v.setAuth(2);
             type = ":生产控制";

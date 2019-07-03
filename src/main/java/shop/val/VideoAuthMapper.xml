@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="shop.val.VideoAuthMapper" >
+  <resultMap id="BaseResultMap" type="shop.domain.VideoAuth" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="token" property="token" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="accredit" property="accredit" jdbcType="INTEGER" />
+    <result column="auth" property="auth" jdbcType="INTEGER" />
+    <result column="created" property="created" jdbcType="TIMESTAMP" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, token, status, accredit, auth, created
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from video_auth
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+
+  <select id="selectByAccredit" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from video_auth
+    where token = #{token} and accredit = 1
+  </select>
+
+
+  <select id="selectByToken" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from video_auth
+    where token = #{token} and accredit = 1
+  </select>
+
+
+
+  <select id="selectByTokenForAuth1" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from video_auth
+    where token = #{token} and auth = 1 and status = 1
+  </select>
+
+
+  <select id="selectByTokenForAuth2" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from video_auth
+    where token = #{token} and auth = 2 and status = 1
+  </select>
+
+  <insert id="insert" parameterType="shop.domain.VideoAuth" useGeneratedKeys="true" keyProperty="id"  >
+    insert into video_auth (id, token, status, 
+      accredit, auth, created
+      )
+    values (#{id,jdbcType=INTEGER}, #{token,jdbcType=VARCHAR}, #{status,jdbcType=INTEGER}, 
+      #{accredit,jdbcType=INTEGER}, #{auth,jdbcType=INTEGER}, #{created,jdbcType=TIMESTAMP}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="shop.domain.VideoAuth" >
+    insert into video_auth
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="token != null" >
+        token,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="accredit != null" >
+        accredit,
+      </if>
+      <if test="auth != null" >
+        auth,
+      </if>
+      <if test="created != null" >
+        created,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="token != null" >
+        #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="accredit != null" >
+        #{accredit,jdbcType=INTEGER},
+      </if>
+      <if test="auth != null" >
+        #{auth,jdbcType=INTEGER},
+      </if>
+      <if test="created != null" >
+        #{created,jdbcType=TIMESTAMP},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="shop.domain.VideoAuth" >
+    update video_auth
+    <set >
+      <if test="token != null" >
+        token = #{token,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="accredit != null" >
+        accredit = #{accredit,jdbcType=INTEGER},
+      </if>
+      <if test="auth != null" >
+        auth = #{auth,jdbcType=INTEGER},
+      </if>
+      <if test="created != null" >
+        created = #{created,jdbcType=TIMESTAMP},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="shop.domain.VideoAuth" >
+    update video_auth
+    set token = #{token,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      accredit = #{accredit,jdbcType=INTEGER},
+      auth = #{auth,jdbcType=INTEGER},
+      created = #{created,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <update id="updateByToken" parameterType="java.lang.Integer" >
+    update video_auth
+    set status = 1
+    where  id= #{id}
+  </update>
+
+</mapper>

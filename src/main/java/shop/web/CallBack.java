@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import shop.domain.ResMap;
+import shop.service.AlarmService;
 import shop.service.CallBackService;
 import shop.service.LoginService;
 import shop.service.VideoService;
@@ -30,6 +31,9 @@ public class CallBack {
     private VideoService videoService;
 
     @Resource
+    private AlarmService alarmService;
+
+    @Resource
     private LoginService loginService;
 
     @RequestMapping(value = "back")
@@ -41,6 +45,17 @@ public class CallBack {
         }
         log.info("CallBack is request ------" + JSONObject.toJSONString(data));
         callBackService.sendTemplateMsg(data);
+        return null;
+    }
+
+    @RequestMapping(value = "phoneMeassage")
+    @ResponseBody
+    public Map phoneMeassage(@RequestParam String data) {
+        if (StringUtils.isEmpty(data)) {
+            log.warn("phoneMeassage in null");
+        }
+        log.info("phoneMeassage is request ------" + JSONObject.toJSONString(data));
+        alarmService.sendCallBackPhoneMessage(data);
         return null;
     }
 

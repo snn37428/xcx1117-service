@@ -70,9 +70,9 @@ public class AlarmService {
     }
 
     /**
-     *  申请权限短信报警
+     * 申请权限短信报警
      */
-    public void sendPhoneMessage(String type, String code){
+    public void sendPhoneMessage(String type, String code) {
         Map<String, String> mapMsg = new HashMap<String, String>(2);
         mapMsg.put("type", type);
         mapMsg.put("code", code);
@@ -80,5 +80,26 @@ public class AlarmService {
         String singName = "甜圆云通知";
         alarm.send(mapMsg, template, singName);
     }
+
+
+    /**
+     * 摄像头上线短信通知
+     */
+    public void sendCallBackPhoneMessage(String token) {
+        Map<String, String> mapMsg = new HashMap<String, String>(2);
+        mapMsg.put("code", token.substring(1, 10));
+        String template = "SMS_169636349";
+        String singName = "甜圆云通知";
+        alarm.send(mapMsg, template, singName);
+        this.sendCallBackPhoneDingDing(token);
+    }
+
+    /**
+     * 摄像头上线钉钉通知
+     */
+    public void sendCallBackPhoneDingDing(String token) {
+        alarm.sendDDingAlarmInfo("摄像头上线通知，上线摄像头TOKEN=" + token);
+    }
+
 
 }
